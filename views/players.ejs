@@ -1,0 +1,38 @@
+<% include partials/header.ejs %>
+    <div class="table-wrapper">
+        <% if (lol_player.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">GamerTag</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Region</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">Positionn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% lol_player.forEach((player, index) => { %>
+                        <tr>
+                            <th scope="row"><%= player.id %></th>
+                            <td><%= player.fname %></td>
+                            <td><%= player.lname %></td>
+                            <td><%= player.region %></td>
+                            <td><%= player.teamid %></td>
+                            <td>@<%= player.positionid %></td>  
+
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No players found. Go <a href="/players/new" >here</a> to add players.</p>
+        <% } %> 
+    </div>   
+</div>
+</body>
+</html>
+<% include partials/footer %>
+
