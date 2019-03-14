@@ -8,18 +8,20 @@ module.exports = {
         });
     },
     addPlayer: (req, res) => {
-        if (!req.files) {
-            return res.status(400).send("No files were uploaded.");
-        }
+        // if (!req.files) {
+        //     return res.status(400).send("No files were uploaded.");
+        // }
 
         let message = '';
-        let first_name = req.body.first_name;
-        let last_name = req.body.last_name;
-        let position = req.body.position;
-        let number = req.body.number;
-        let username = req.body.username;
+        let gamertag = req.body.gamertag;
+        let fname = req.body.fname;
+        let lname = req.body.lname;
+        let region = req.body.region;
+        let teamid = req.body.team;
+        let positionid = req.body.position;
+        
 
-        let usernameQuery = "SELECT * FROM `players` WHERE user_name = '" + username + "'";
+        let usernameQuery = "SELECT * FROM `lol_player` WHERE gamertag = '" + gamertag + "'";
 
         db.query(usernameQuery, (err, result) => {
             if (err) {
@@ -36,8 +38,8 @@ module.exports = {
                 
                     
                 // send the player's details to the database
-                let query = "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
-                    first_name + "', '" + last_name + "', '" + position + "', '" + number + "', '" + "NULL" + "', '" + username + "')";
+                let query = "INSERT INTO `lol_player` (gamertag, fname, lname, region, teamid, positionid) VALUES ('" +
+                    gamertag + "', '" + fname + "', '" + lname + "', '" + region + "', '" + teamid + "', '" + positionid + "')";
                 db.query(query, (err, result) => {
                     if (err) {
                         return res.status(500).send(err);
@@ -51,7 +53,7 @@ module.exports = {
     },
     editPlayerPage: (req, res) => {
         let playerId = req.params.id;
-        let query = "SELECT * FROM `players` WHERE id = '" + playerId + "' ";
+        let query = "SELECT * FROM `lol_player` WHERE id = '" + playerId + "' ";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -65,12 +67,12 @@ module.exports = {
     },
     editPlayer: (req, res) => {
         let playerId = req.params.id;
-        let first_name = req.body.first_name;
-        let last_name = req.body.last_name;
-        let position = req.body.position;
-        let number = req.body.number;
+        let gamertag = req.body.gamertag
+        let fname = req.body.fname;
+        let lname = req.body.lname;
+        let region = req.body.region;
 
-        let query = "UPDATE `players` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `position` = '" + position + "', `number` = '" + number + "' WHERE `players`.`id` = '" + playerId + "'";
+        let query = "UPDATE `lol_player` SET `gamertag` = '" + gamertag + "', `fname` = '" + fname + "', `lname` = '" + lname + "', `region` = '" + region + "' WHERE `id` = '" + playerId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -80,7 +82,7 @@ module.exports = {
     },
     deletePlayer: (req, res) => {
         let playerId = req.params.id;
-        let deleteUserQuery = 'DELETE FROM players WHERE id = "' + playerId + '"';
+        let deleteUserQuery = 'DELETE FROM lol_player WHERE id = "' + playerId + '"';
 
         db.query(deleteUserQuery, (err, result) => {
                     if (err) {
