@@ -1,13 +1,16 @@
-var express = require("express");
-var app = express();
-var mysql = require('mysql');
-var bodyParser = require("body-parser");
-
-
+const express = require('express');
+const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
 const path = require('path');
-//const {getHomePage} = require('./routes/index');
-//const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+const app = express();
 
+const {getHomePage} = require('./routes/index');
+const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+const port = 5681;
+
+// create connection to database
+// the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
 const db = mysql.createConnection ({
     host: 'classmysql.engr.oregonstate.edu',
     user: 'cs340_osakwel',
@@ -15,6 +18,7 @@ const db = mysql.createConnection ({
     database: 'cs340_osakwel'
 });
 
+// connect to database
 db.connect((err) => {
     if (err) {
         throw err;
@@ -23,37 +27,26 @@ db.connect((err) => {
 });
 global.db = db;
 
+// configure middleware
+app.set('port', process.env.port || port); // set express to use this port
+app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
+app.set('view engine', 'ejs'); // configure template engine
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // parse form data client
+app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
+app.use(fileUpload()); // configure fileupload
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + "/public"));
-app.set('views', __dirname + '/views');
-app.set("view engine", "ejs");
+// routes for the app
+
+app.get('/', getHomePage);
+app.get('/add', addPlayerPage);
+app.get('/edit/:id', editPlayerPage);
+app.get('/delete/:id', deletePlayer);
+app.post('/add', addPlayer);
+app.post('/edit/:id', editPlayer);
 
 
-
-//app.get('/', getHomePage);   
-app.get("/", function(req, res){
-    res.render("index");
-});
-
-app.get("/players", function(req, res){
-    res.render("players",{page_name: 'players'});
-});
-
-// app.post("/campgrounds", function(req, res){
-//     // get data from form and add to campgrounds array
-//     var name = req.body.name;
-//     var image = req.body.image;
-//     var newCampground = {name: name, image: image}
-//     campgrounds.push(newCampground);
-//     //redirect back to campgrounds page
-//     res.redirect("/campgrounds");
-// });
-
-app.get("/players/new", function(req, res){
-   res.render("newplayer.ejs"); 
-});
-
-app.listen(5681, process.env.IP, function(){
-   console.log("The LoL Database Has Started!");
+// set the app to listen on the port
+app.listen(port, () => {
+    console.log(`Server running on port: ${port}`);
 });
