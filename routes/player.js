@@ -42,7 +42,7 @@ module.exports = {
                     if (err) {
                         return res.status(500).send(err);
                     }
-                    res.redirect('/');
+                    res.redirect('/players');
                 });
                     
                 
@@ -75,7 +75,7 @@ module.exports = {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            res.redirect('/players');
         });
     },
     deletePlayer: (req, res) => {
@@ -86,7 +86,7 @@ module.exports = {
                     if (err) {
                         return res.status(500).send(err);
                     }
-                    res.redirect('/');
+                    res.redirect('/players');
                 });
     }
 };

@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-const {getHomePage} = require('./routes/index');
+const {getPlayerPage} = require('./routes/playerpage');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 5681;
 
@@ -38,7 +38,10 @@ app.use(fileUpload()); // configure fileupload
 
 // routes for the app
 
-app.get('/', getHomePage);
+app.get("/", function(req, res){
+    res.render("index", {page_name: 'index'});
+});
+app.get('/players', getPlayerPage);
 app.get('/add', addPlayerPage);
 app.get('/edit/:id', editPlayerPage);
 app.get('/delete/:id', deletePlayer);
