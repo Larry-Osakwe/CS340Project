@@ -7,8 +7,12 @@ const app = express();
 
 const {getPlayerPage} = require('./routes/playerpage');
 const {getChampionPage} = require('./routes/championpage');
+const {getTeamPage} = require('./routes/teampage');
+const {getPositionPage} = require('./routes/positionpage');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const {addChampionPage, addChampion, deleteChampion, editChampion, editChampionPage} = require('./routes/champion');
+const {addTeamPage, addTeam, deleteTeam, editTeam, editTeamPage} = require('./routes/team');
+const {addPositionPage, addPosition, deletePosition, editPosition, editPositionPage} = require('./routes/position');
 const port = 5681;
 
 // create connection to database
@@ -57,6 +61,20 @@ app.get('/edit/:id', editChampionPage);
 app.get('/delete/:id', deleteChampion);
 app.post('/add', addChampion);
 app.post('/edit/:id', editChampion);
+
+app.get('/teams', getTeamPage);
+app.get('/add', addTeamPage);
+app.get('/edit/:id', editTeamPage);
+app.get('/delete/:id', deleteTeam);
+app.post('/add', addTeam);
+app.post('/edit/:id', editTeam);
+
+app.get('/positions', getPositionPage);
+app.get('/add', addPositionPage);
+app.get('/edit/:id', editPositionPage);
+app.get('/delete/:id', deletePosition);
+app.post('/add', addPosition);
+app.post('/edit/:id', editPosition);
 
 // set the app to listen on the port
 app.listen(port, () => {
