@@ -6,7 +6,9 @@ const path = require('path');
 const app = express();
 
 const {getPlayerPage} = require('./routes/playerpage');
+const {getChampionPage} = require('./routes/championpage');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+const {addChampionPage, addChampion, deleteChampion, editChampion, editChampionPage} = require('./routes/champion');
 const port = 5681;
 
 // create connection to database
@@ -41,6 +43,7 @@ app.use(fileUpload()); // configure fileupload
 app.get("/", function(req, res){
     res.render("index", {page_name: 'index'});
 });
+
 app.get('/players', getPlayerPage);
 app.get('/add', addPlayerPage);
 app.get('/edit/:id', editPlayerPage);
@@ -48,6 +51,12 @@ app.get('/delete/:id', deletePlayer);
 app.post('/add', addPlayer);
 app.post('/edit/:id', editPlayer);
 
+app.get('/champions', getChampionPage);
+app.get('/add', addChampionPage);
+app.get('/edit/:id', editChampionPage);
+app.get('/delete/:id', deleteChampion);
+app.post('/add', addChampion);
+app.post('/edit/:id', editChampion);
 
 // set the app to listen on the port
 app.listen(port, () => {
