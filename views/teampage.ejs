@@ -21,16 +21,16 @@
                             <td><%= player.wins %></td>
                             <td><%= player.losses %></td>
                             <td>
-                                <a href="/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/teams/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/teams/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <p class="text-center">Go <a href="/add" >here</a> to add teams.</p>
+            <p class="text-center">Go <a href="/teams/add" >here</a> to add teams.</p>
         <% } else { %>
-            <p class="text-center">No teams found. Go <a href="/add" >here</a> to add teams.</p>
+            <p class="text-center">No teams found. Go <a href="/teams/add" >here</a> to add teams.</p>
         <% } %>
     </div>
 </div>

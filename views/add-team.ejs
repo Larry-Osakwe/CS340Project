@@ -1,50 +1,35 @@
 <% include partials/header.ejs %>
     <div class="container">
         <div class="row">
-            <h1 style="text-align: center">Create a New Player</h1>
+            <h1 style="text-align: center">Create a New Team</h1>
                 <% if (message != '') { %>
                     <p class="text-center text-danger"><%= message %></p>
                 <% } %>
                 <div style="width: 30%; margin: 25px auto;">
-                <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+                <form class="add-team-form" action="" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="gamertag" placeholder="gamertag">
+                            <input class="form-control" type="text" name="TeamName" placeholder="Team Name>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="fname" placeholder="first name">
+                            <label>
+                                Blue Side 
+                                <input class="form-control" type="radio" name="side" value="Blue">
+                            </label>
+                            <label>
+                                Red Side
+                                <input class="form-control" type="radio" name="side" value="Red">
+                            </label>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="lname" placeholder="last name">
+                            <input class="form-control" type="text" name="wins" placeholder="Wins">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="losses" placeholder="Losses">
                          </div>
-                         <div class="form-group">
-                            <input class="form-control" type="text" name="team" placeholder="team name">
-                        </div>
-                        <div class="form-group">
-                            <label>
-                            Region: 
-                                <select id= "region" name="region" class="form-control">
-                                    <option>NA</option>
-                                    <option>EU</option>
-                                    <option>KR</option>
-                                    <option>CN</option>
-                                    <option>BR</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                            Position: 
-                                <select id= "position" name="position" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </label>
-                        </div>
+                         
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Add Player</button>
+                    <button type="submit" class="btn btn-primary float-right">Add Team</button>
                 </form>
             </div>
 </div>

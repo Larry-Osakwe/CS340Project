@@ -2,7 +2,7 @@ const fs = require('fs');
 
 module.exports = {
     addTeamPage: (req, res) => {
-        res.render('add-player.ejs', {
+        res.render('add-team.ejs', {
             title: 'Welcome to Socka | Add a new player'
             ,message: ''
         });

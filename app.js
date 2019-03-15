@@ -49,11 +49,11 @@ app.get("/", function(req, res){
 });
 
 app.get('/players', getPlayerPage);
-app.get('/add', addPlayerPage);
-app.get('/edit/:id', editPlayerPage);
-app.get('/delete/:id', deletePlayer);
-app.post('/add', addPlayer);
-app.post('/edit/:id', editPlayer);
+app.get('/players/add', addPlayerPage);
+app.get('/players/edit/:id', editPlayerPage);
+app.get('/players/delete/:id', deletePlayer);
+app.post('/players/add', addPlayer);
+app.post('/players/edit/:id', editPlayer);
 
 app.get('/champions', getChampionPage);
 app.get('/add', addChampionPage);
@@ -63,11 +63,11 @@ app.post('/add', addChampion);
 app.post('/edit/:id', editChampion);
 
 app.get('/teams', getTeamPage);
-app.get('/add', addTeamPage);
-app.get('/edit/:id', editTeamPage);
-app.get('/delete/:id', deleteTeam);
-app.post('/add', addTeam);
-app.post('/edit/:id', editTeam);
+app.get('/teams/add', addTeamPage);
+app.get('/teams/edit/:id', editTeamPage);
+app.get('/teams/delete/:id', deleteTeam);
+app.post('/teams/add', addTeam);
+app.post('/teams/edit/:id', editTeam);
 
 app.get('/positions', getPositionPage);
 app.get('/add', addPositionPage);
