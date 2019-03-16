@@ -2,7 +2,7 @@ const fs = require('fs');
 
 module.exports = {
     addChampionPage: (req, res) => {
-        res.render('add-player.ejs', {
+        res.render('add-champion.ejs', {
             title: 'Welcome to Socka | Add a new player'
             ,message: ''
         });
@@ -13,23 +13,19 @@ module.exports = {
         // }
 
         let message = '';
-        let gamertag = req.body.gamertag;
-        let fname = req.body.fname;
-        let lname = req.body.lname;
-        let region = req.body.region;
-        let teamid = req.body.team;
-        let positionid = req.body.position;
-        
+        let name = req.body.name;
+        let gender = req.body.gender;
+        let archetype = req.body.archetype;
 
-        let usernameQuery = "SELECT * FROM `lol_player` WHERE gamertag = '" + gamertag + "'";
+        let usernameQuery = "SELECT * FROM `lol_player` WHERE name = '" + name + "'";
 
         db.query(usernameQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
             if (result.length > 0) {
-                message = 'Username already exists';
-                res.render('add-player.ejs', {
+                message = 'Champion name already exists';
+                res.render('add-champion.ejs', {
                     message,
                     title: 'Welcome to Socka | Add a new player'
                 });
@@ -38,13 +34,13 @@ module.exports = {
                 
                     
                 // send the player's details to the database
-                let query = "INSERT INTO `lol_player` (gamertag, fname, lname, region, teamid, positionid) VALUES ('" +
-                    gamertag + "', '" + fname + "', '" + lname + "', '" + region + "', '" + teamid + "', '" + positionid + "')";
+                let query = "INSERT INTO `lol_champion` (name, gender, archetype) VALUES ('" +
+                    name + "', '" + gender + "', '" + archetype + "')";
                 db.query(query, (err, result) => {
                     if (err) {
                         return res.status(500).send(err);
                     }
-                    res.redirect('/players');
+                    res.redirect('/champions');
                 });
                     
                 
@@ -52,13 +48,13 @@ module.exports = {
         });
     },
     editChampionPage: (req, res) => {
-        let playerId = req.params.id;
-        let query = "SELECT * FROM `lol_player` WHERE id = '" + playerId + "' ";
+        let championId = req.params.id;
+        let query = "SELECT * FROM `lol_champion` WHERE id = '" + championId + "' ";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('edit-player.ejs', {
+            res.render('edit-champion.ejs', {
                 title: 'Edit  Player'
                 ,player: result[0]
                 ,message: ''
@@ -66,29 +62,28 @@ module.exports = {
         });
     },
     editChampion: (req, res) => {
-        let playerId = req.params.id;
-        let gamertag = req.body.gamertag
-        let fname = req.body.fname;
-        let lname = req.body.lname;
-        let region = req.body.region;
+        let championId = req.params.id;
+        let name = req.body.name;
+        let gender = req.body.gender;
+        let archetype = req.body.archetype;
 
-        let query = "UPDATE `lol_player` SET `gamertag` = '" + gamertag + "', `fname` = '" + fname + "', `lname` = '" + lname + "', `region` = '" + region + "' WHERE `id` = '" + playerId + "'";
+        let query = "UPDATE `lol_champion` SET `name` = '" + name + "', `gender` = '" + gender + "', `archetype` = '" + archetype + "' WHERE `id` = '" + championId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/players');
+            res.redirect('/champions');
         });
     },
     deleteChampion: (req, res) => {
-        let playerId = req.params.id;
-        let deleteUserQuery = 'DELETE FROM lol_player WHERE id = "' + playerId + '"';
+        let championId = req.params.id;
+        let deleteUserQuery = 'DELETE FROM lol_champion WHERE id = "' + championId + '"';
 
         db.query(deleteUserQuery, (err, result) => {
                     if (err) {
                         return res.status(500).send(err);
                     }
-                    res.redirect('/players');
+                    res.redirect('/champions');
                 });
     }
 };

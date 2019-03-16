@@ -2,7 +2,7 @@ const fs = require('fs');
 
 module.exports = {
     addPositionPage: (req, res) => {
-        res.render('add-player.ejs', {
+        res.render('add-position.ejs', {
             title: 'Welcome to Socka | Add a new player'
             ,message: ''
         });
@@ -13,52 +13,28 @@ module.exports = {
         // }
 
         let message = '';
-        let gamertag = req.body.gamertag;
-        let fname = req.body.fname;
-        let lname = req.body.lname;
-        let region = req.body.region;
-        let teamid = req.body.team;
-        let positionid = req.body.position;
+        let position_name = req.body.position_name;
+        let lane = req.body.lane;
+        let position_type = req.body.position_type;
         
-
-        let usernameQuery = "SELECT * FROM `lol_player` WHERE gamertag = '" + gamertag + "'";
-
-        db.query(usernameQuery, (err, result) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            if (result.length > 0) {
-                message = 'Username already exists';
-                res.render('add-player.ejs', {
-                    message,
-                    title: 'Welcome to Socka | Add a new player'
-                });
-            } else {
-                // check the filetype before uploading it
-                
-                    
-                // send the player's details to the database
-                let query = "INSERT INTO `lol_player` (gamertag, fname, lname, region, teamid, positionid) VALUES ('" +
-                    gamertag + "', '" + fname + "', '" + lname + "', '" + region + "', '" + teamid + "', '" + positionid + "')";
-                db.query(query, (err, result) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.redirect('/players');
-                });
-                    
-                
-            }
-        });
-    },
-    editPositionPage: (req, res) => {
-        let playerId = req.params.id;
-        let query = "SELECT * FROM `lol_player` WHERE id = '" + playerId + "' ";
+        // send the player's details to the database
+        let query = "INSERT INTO `lol_position` (position_name, lane, position_type) VALUES ('" +
+            position_name + "', '" + lane + "', '" + position_type + "')";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('edit-player.ejs', {
+            res.redirect('/positions');
+        });
+    },
+    editPositionPage: (req, res) => {
+        let positionId = req.params.id;
+        let query = "SELECT * FROM `lol_position` WHERE id = '" + positionId + "' ";
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.render('edit-position.ejs', {
                 title: 'Edit  Player'
                 ,player: result[0]
                 ,message: ''
@@ -66,29 +42,28 @@ module.exports = {
         });
     },
     editPosition: (req, res) => {
-        let playerId = req.params.id;
-        let gamertag = req.body.gamertag
-        let fname = req.body.fname;
-        let lname = req.body.lname;
-        let region = req.body.region;
+        let positionId = req.params.id;
+        let position_name = req.body.position_name;
+        let lane = req.body.lane;
+        let position_type = req.body.position_type;
 
-        let query = "UPDATE `lol_player` SET `gamertag` = '" + gamertag + "', `fname` = '" + fname + "', `lname` = '" + lname + "', `region` = '" + region + "' WHERE `id` = '" + playerId + "'";
+        let query = "UPDATE `lol_position` SET `position_name` = '" + position_name + "', `lane` = '" + lane + "', `position_type` = '" + position_type + "' WHERE `id` = '" + positionId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/players');
+            res.redirect('/positions');
         });
     },
     deletePosition: (req, res) => {
-        let playerId = req.params.id;
-        let deleteUserQuery = 'DELETE FROM lol_player WHERE id = "' + playerId + '"';
+        let positionId = req.params.id;
+        let deleteUserQuery = 'DELETE FROM lol_position WHERE id = "' + positionId + '"';
 
         db.query(deleteUserQuery, (err, result) => {
                     if (err) {
                         return res.status(500).send(err);
                     }
-                    res.redirect('/players');
+                    res.redirect('/positions');
                 });
     }
 };

@@ -5,12 +5,9 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Gamertag</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Region</th>
-                        <th scope="col">Team</th>
-                        <th scope="col">Position</th>
+                        <th scope="col">Champion</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Archetype</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -18,23 +15,20 @@
                     <% players.forEach((player, index) => { %>
                         <tr>
                             <th scope="row"><%= player.id %></th>
-                            <td><%= player.gamertag %></td>
-                            <td><%= player.fname %></td>
-                            <td><%= player.lname %></td>
-                            <td><%= player.region %></td>
-                            <td><%= player.team %></td>
-                            <td><%= player.positionn %></td>
+                            <td><%= player.name %></td>
+                            <td><%= player.gender %></td>
+                            <td><%= player.archetype %></td>
                             <td>
-                                <a href="/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/champions/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/champions/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <p class="text-center">Go <a href="/add" >here</a> to add players.</p>
+            <p class="text-center">Go <a href="/champions/add" >here</a> to add champions.</p>
         <% } else { %>
-            <p class="text-center">No players found. Go <a href="/add" >here</a> to add players.</p>
+            <p class="text-center">No players found. Go <a href="/champions/add" >here</a> to add champions.</p>
         <% } %>
     </div>
 </div>

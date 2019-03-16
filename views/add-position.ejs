@@ -9,42 +9,35 @@
                 <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="gamertag" placeholder="gamertag">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="fname" placeholder="first name">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="lname" placeholder="last name">
-                         </div>
-                         <div class="form-group">
-                            <input class="form-control" type="text" name="team" placeholder="team name">
+                            <input class="form-control" type="text" name="position_name" placeholder="position">
                         </div>
                         <div class="form-group">
                             <label>
                             Region: 
-                                <select id= "region" name="region" class="form-control">
-                                    <option>NA</option>
-                                    <option>EU</option>
-                                    <option>KR</option>
-                                    <option>CN</option>
-                                    <option>BR</option>
+                                <select id= "lane" name="lane" class="form-control">
+                                    <option>Top</option>
+                                    <option>Jungle</option>
+                                    <option>Middle</option>
+                                    <option>Bottom</option>
                                 </select>
                             </label>
                         </div>
                         <div class="form-group">
                             <label>
-                            Position: 
-                                <select id= "position" name="position" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                AD 
+                                <input class="form-control" type="radio" name="position_type" value="AD">
+                            </label>
+                            <label>
+                                AP
+                                <input class="form-control" type="radio" name="position_type" value="AP">
+                            </label>
+                            <label>
+                                Mixed
+                                <input class="form-control" type="radio" name="position_type" value="Mixed">
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Add Player</button>
+                    <button type="submit" class="btn btn-primary float-right">Edit Position</button>
                 </form>
             </div>
 </div>

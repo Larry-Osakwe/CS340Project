@@ -56,11 +56,11 @@ app.post('/players/add', addPlayer);
 app.post('/players/edit/:id', editPlayer);
 
 app.get('/champions', getChampionPage);
-app.get('/add', addChampionPage);
-app.get('/edit/:id', editChampionPage);
-app.get('/delete/:id', deleteChampion);
-app.post('/add', addChampion);
-app.post('/edit/:id', editChampion);
+app.get('/champions/add', addChampionPage);
+app.get('/champions/edit/:id', editChampionPage);
+app.get('/champions/delete/:id', deleteChampion);
+app.post('/champions/add', addChampion);
+app.post('/champions/edit/:id', editChampion);
 
 app.get('/teams', getTeamPage);
 app.get('/teams/add', addTeamPage);
@@ -70,11 +70,11 @@ app.post('/teams/add', addTeam);
 app.post('/teams/edit/:id', editTeam);
 
 app.get('/positions', getPositionPage);
-app.get('/add', addPositionPage);
-app.get('/edit/:id', editPositionPage);
-app.get('/delete/:id', deletePosition);
-app.post('/add', addPosition);
-app.post('/edit/:id', editPosition);
+app.get('/positions/add', addPositionPage);
+app.get('/positions/edit/:id', editPositionPage);
+app.get('/positions/delete/:id', deletePosition);
+app.post('/positions/add', addPosition);
+app.post('/positions/edit/:id', editPosition);
 
 // set the app to listen on the port
 app.listen(port, () => {

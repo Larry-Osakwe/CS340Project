@@ -63,6 +63,7 @@ module.exports = {
         });
     },
     editTeam: (req, res) => {
+    	let teamId = req.params.id;
         let TeamName = req.body.TeamName;
         let side = req.body.side;
         let wins = req.body.wins;
